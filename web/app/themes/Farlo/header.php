@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+        <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/favicon.ico">
 
         <?php // Add a pingback url auto-discovery header for singularly identifiable articles. ?>
         <?php if (is_singular() && pings_open()) : ?>
