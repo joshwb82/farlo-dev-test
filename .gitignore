@@ -26,7 +26,7 @@ web/wp
 .vscode
 auth.json
 composer.lock
-wp-config.php
+!wp-config.php
 wp-config-ddev.php
 
 # Node
