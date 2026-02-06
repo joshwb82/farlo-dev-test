@@ -1,8 +1,14 @@
 <?php get_header();?>
-    
-    <h1><?php the_title(); ?></h1>
 
-<?php the_content(); ?>
+    <!-- Show Grid -->
+    <div class="show-list">
+        <?php
+            get_template_part('modules/show-grid');
+        ?>
+    </div>
+
+    <!-- Gutenberg block content -->    
+    <?php the_content(); ?>
 
 
 <?php get_footer();

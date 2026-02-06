@@ -11,6 +11,7 @@
         <?php if (is_singular() && pings_open()) : ?>
             <link rel="pingback" href="<?php echo esc_url(get_bloginfo('pingback_url')); ?>">
         <?php endif; ?>
+        <title>Farlo | Theatre Shows</title>
 
         <?php wp_head(); ?>
     </head>
@@ -19,8 +20,20 @@
         <?php wp_body_open(); ?>
 
         <div id="page" class="site">
+
+            <!-- Skip link -->
             <a class="skip-link screen-reader-text" href="#site-main">
                 <?php esc_html_e('Skip to content', 'farlo'); ?>
             </a>
-            <header></header>
+
+            <!-- Header -->
+            <header>
+                <a href="/" target="_self">
+                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/dist/images/farlo-logo.png" class="logo" alt="<?php bloginfo('name'); ?>">
+                </a>
+
+                <h1><?php the_title(); ?></h1>
+            </header>
+            
+            <!-- Main Content -->
             <main id="site-main" class="site-main" role="main">

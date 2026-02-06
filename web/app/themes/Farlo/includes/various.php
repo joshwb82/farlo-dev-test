@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 // DISABLE GUTENBERG FROM CPT
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg', 10, 2);
 

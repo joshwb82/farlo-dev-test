@@ -1,148 +1,75 @@
-# Farlo Technical Developer Test
+# Farlo Technical Developer Test - API Show Display
 
-Congratulations on reaching the next stage of Farlo's interview process.  
-This technical test is designed to give us insight into how you approach real-world WordPress development: environment setup, code structure, data handling, and technical decision-making.
+This project is a technical test demonstrating a WordPress setup that imports show data from the Official London Theatre API into a custom post type, using a small custom plugin and ACF for structured data. The data is then displayed on the home page.
 
-Please read this README carefully before starting. Your submission **must work from scratch** by following the steps below.
 
----
+## Requirements
+- PHP 8.2+
+- Composer
+- Node.js
+- DDEV
+- Gulp
 
-## Overview
 
-You will be working with a provided WordPress and DDEV setup and a starter theme.
+## Setup
 
-Your task is to configure the local environment, complete the technical requirements outlined in the test brief, and submit your solution in a clean, reproducible state.
+1. Clone the repository
+2. Run `composer install`
+3. Run `ddev start`
+4. Visit the site URL shown in wp-config-ddev.php
+5. Complete the WordPress install
+6. Activate the Farlo theme
+7. Activate plugins
+      - Advanced Custom fields
+      - Farlo show importer
 
-[**Full test brief**](https://docs.google.com/document/d/1J7u44W7UJYjCa8UNuMvoT5Vw6k-WYHCmJBlEe8VoQkk/edit?usp=sharing)
 
----
+## Front-end build
 
-## Prerequisites
+Source files live in `src/assets/` and are compiled to `dist/`.
 
-Before you begin, make sure you have the following installed locally:
+From the theme directory:
 
-- Composer  
-- Docker  
-- DDEV  
-- Node.js (LTS recommended)  
-- Gulp  
-- direnv  
+- `npm install`
+  Install required Node modules
 
-You should be comfortable using the terminal and running CLI-based tooling.
+- `npm run build`
+  Compiles the current setup and adds compliled files to `dist/`.
 
----
+- `npm run watch`
+  Compiles the current setup and adds compliled files to `dist/`, and keeps watching the files for more changes
 
-## Pre-setup (Important)
+### Note
+I commited compiled assets to help with the reviewing
 
-Before starting the project, you **must update the project naming** in the following files:
 
-- `/.ddev/config.yaml`  
+## Importing shows
 
-This ensures consistency across the local environment, theme assets, and tooling.
+1. Log into wp-admin
+2. Navigate to **Tools → Import Shows**
+3. Click **Run Import**
+4. Wait for confirmation that import was successful
 
----
+The importer should be idempotent and can be run multiple times without duplicating.
 
-## Initial Environment Setup
 
-Open a terminal in the project root and run:
+## Notes / Decisions
 
-`ddev config`
+- Shows are imported into a custom post type (`shows`), to make it easier to display and manage the shows on the site
+- Importing is triggered manually via an admin page rather than on page load, this was so it would not affect load time of the site
+- Shows are stored as a shows Custom Post Type and show fields are stored in ACF. This was an effcient way to manage the API data. 
+- Where multiple booking URLs are provided, we store only the first valid URL for simplicity.
+- Idempotency is achived by using the show ID, to compare new feed to current feed and only add shows that don't exist otherwise update show only
+- A plugin was used for the importer, to help keep the code clean, and allow us to create a Admin UI page to make using the tool easy for non tech skilled people if needed
 
-When prompted:
 
-- Change the project name from the default to your chosen project name  
-- Accept the remaining defaults unless you have a strong reason not to  
+## Possible improvements
 
-This step configures DDEV correctly for your local setup.
+- Schedule the importer via WP-Cron Job
+- Improve error logging and reporting, log to the WP debug log
+- Adding caching could be something to add, we could add transient caching and add a delay to the call, so it will only use the cached API call for 10mins from the last time it was called.
+- Add a filter to the show grid to make it easier to navigate through the shows on the front end.
+- Set shows that do not appear on the latest API to draft, so old shows do not show in grid 
 
----
-
-## Setting Up WordPress Locally
-
-Once the environment is configured, run:
-
-`ddev start`
-
-On first run, this will:
-
-- Start the Docker containers  
-- Set up the local database  
-- Generate a local `.env` file from `.env.example` using DDEV defaults  
-- Install WordPress via Composer  
-- Check out the Farlo starter theme  
-
-Wait for this process to complete before proceeding.
-
----
-
-## Front-end Tooling
-
-The starter theme includes source files under `src/assets/` (SCSS, JavaScript and media).
-
-You are expected to:
-
-- Set up your own front-end build pipeline (Gulp is recommended)  
-- Compile assets into a sensible output location (e.g. `dist/`)  
-- Add appropriate scripts to `package.json` (build, watch, etc.)  
-- Document how to run your build process in your README  
-
-We are assessing **pragmatic decisions and clarity**, not the complexity of the tooling.
-
----
-
-## Accessing the Site
-
-After `ddev start` completes, DDEV will output the local site URL.
-
-You can also run:
-
-`ddev launch`
-
-to open the site in your browser.
-
----
-
-## Completing the Test
-
-Once your environment is running:
-
-- Follow the requirements outlined in the Farlo Technical Developer Test brief  
-- Implement the importer and front-end templates as described  
-
-Your solution should be:
-
-- Incremental  
-- Idempotent  
-- Free of PHP warnings and notices  
-- Reasonably performant and production-minded  
-
----
-
-## Submission Requirements
-
-Your final submission must include:
-
-- Your completed code (GitHub repository link or zip file)  
-- A README.md that clearly explains:
-  - How to set up the project from scratch  
-  - How to run the importer  
-  - How to build front-end assets  
-  - Any assumptions or trade-offs you made  
-- Any additional notes you feel are relevant  
-
-Optional but encouraged:
-
-- A short commit history showing your working process  
-- A brief “What I’d do next if this were going live” section (for example: performance, caching, monitoring)
-
----
-
-## Time Guidance
-
-Please aim to spend **no more than 3–4 hours** on this task.
-
-We value clarity, reliability, and good technical judgment over excessive scope.
-
-Good luck — we look forward to reviewing your work.
-
-— Farlo
+## Repo Link
+https://github.com/joshwb82/farlo-dev-test

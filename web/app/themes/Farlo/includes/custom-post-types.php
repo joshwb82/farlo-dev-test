@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-// Farlo Shows
-add_action('init', 'farlo_shows');
+defined('ABSPATH') || exit;
 
-function farlo_shows()
+// Farlo Shows
+add_action('init', 'farlo_register_shows');
+
+function farlo_register_shows()
 {
     $labels = [
         'name' => _x('Shows', 'Post Type General Name', 'text_domain'),
@@ -34,7 +36,7 @@ function farlo_shows()
         'supports' => ['title', 'editor'],
         'taxonomies' => [],
         'hierarchical' => false,
-        'public' => false,
+        'public' => true,
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_position' => 20,
@@ -48,5 +50,5 @@ function farlo_shows()
         'publicly_queryable' => true,
         'capability_type' => 'page',
     ];
-    register_post_type('Shows', $args);
+    register_post_type('shows', $args);
 }
