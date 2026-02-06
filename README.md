@@ -15,11 +15,13 @@ This project is a technical test demonstrating a WordPress setup that imports sh
 
 1. Clone the repository
 2. Run `composer install`
-3. Run `ddev start`
-4. Visit the site URL shown in wp-config-ddev.php
-5. Complete the WordPress install
-6. Activate the Farlo theme
-7. Activate plugins
+3. Run `ddev config`
+4. Change the project name from the default to your chosen project name
+5. Accept the remaining defaults unless you have a strong reason not to
+6. Visit the site URL shown in wp-config-ddev.php
+7. Complete the WordPress install
+8. Activate the Farlo theme
+9. Activate plugins
       - Advanced Custom fields
       - Farlo show importer
 
