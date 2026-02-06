@@ -14,16 +14,20 @@ This project is a technical test demonstrating a WordPress setup that imports sh
 ## Setup
 
 1. Clone the repository
-2. Run `composer install`
-3. Run `ddev config`
-4. Change the project name from the default to your chosen project name
-5. Accept the remaining defaults unless you have a strong reason not to
+2. Update .ddev/ config.yaml with name of project
+3. Run `composer install`
+4. Run `ddev config`
+5. Change the project name from the default to your chosen project name
+6. Accept the remaining defaults unless you have a strong reason not to
+7. Run `ddev restart`
 6. Visit the site URL shown in wp-config-ddev.php
 7. Complete the WordPress install
 8. Activate the Farlo theme
 9. Activate plugins
       - Advanced Custom fields
       - Farlo show importer
+10. Create home page
+11. Set home page as WP static main page in settings
 
 
 ## Front-end build
@@ -71,7 +75,8 @@ The importer should be idempotent and can be run multiple times without duplicat
 - Improve error logging and reporting, log to the WP debug log
 - Adding caching could be something to add, we could add transient caching and add a delay to the call, so it will only use the cached API call for 10mins from the last time it was called.
 - Add a filter to the show grid to make it easier to navigate through the shows on the front end.
-- Set shows that do not appear on the latest API to draft, so old shows do not show in grid 
+- Set shows that do not appear on the latest API to draft, so old shows do not show in grid
+- Create home page on WP installation, and activate plugins 
 
 ## Repo Link
 https://github.com/joshwb82/farlo-dev-test
