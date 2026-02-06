@@ -4,6 +4,7 @@ web/app/plugins/*
 web/app/plugins/*/
 !web/app/plugins/.gitkeep
 !web/app/plugins/farlo-show-importer/
+!web/app/plugins/farlo-show-importer/**
 web/app/mu-plugins/*
 web/app/mu-plugins/*/
 !web/app/mu-plugins/farlo-*
